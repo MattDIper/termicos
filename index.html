@@ -1,66 +1,634 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Térmicos 2</title>
+    <meta name="description" content="Térmicos - Startup de estudiantes de la Universidad Nacional de Colombia. Recuperamos energía del agua y el viento en edificios urbanos colombianos.">
+    <title>Térmicos | Eficiencia Energética Urbana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            color: #333;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary-blue: #003366;
+            --accent-green: #00A86B;
+            --silver: #C0C0C0;
         }
-        header {
-            background: #005f73;
-            color: #fff;
-            padding: 1.5rem;
-            text-align: center;
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
         }
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        
+        .tailwind-ready {
+            font-family: 'Inter', system_ui, sans-serif;
         }
-        section {
-            margin-bottom: 1.5rem;
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
         }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background: #e9ecef;
-            color: #555;
+
+        .hero-bg {
+            background: linear-gradient(90deg, #003366 0%, #00A86B 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00A86B;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #003366, #00A86B);
+            bottom: -8px;
+            left: 0;
+            border-radius: 9999px;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 25px 25px 0 -10px #00A86B;
+        }
+        
+        .stat-number {
+            font-variant-numeric: tabular-nums;
         }
     </style>
 </head>
-<body>
-    <header>
-        <h1>Proyecto Térmicos</h1>
-        <p>Una página web básica para presentar el proyecto</p>
+<body class="tailwind-ready">
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b border-[#C0C0C0] sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-[#003366] rounded-2xl flex items-center justify-center text-white text-2xl shadow-inner">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div>
+                    <h1 class="heading-font text-3xl font-semibold tracking-tighter text-[#003366]">Térmicos</h1>
+                    <p class="text-[10px] text-[#00A86B] -mt-1 font-medium tracking-[1px]">ENERGÍA QUE YA ESTÁ AHÍ</p>
+                </div>
+            </div>
+
+            <!-- Menú -->
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#inicio" class="nav-link text-[#003366] hover:text-[#00A86B]">Inicio</a>
+                <a href="#problema" class="nav-link text-[#003366] hover:text-[#00A86B]">El Problema</a>
+                <a href="#solucion" class="nav-link text-[#003366] hover:text-[#00A86B]">Nuestra Solución</a>
+                <a href="#tecnologia" class="nav-link text-[#003366] hover:text-[#00A86B]">Tecnología</a>
+                <a href="#impacto" class="nav-link text-[#003366] hover:text-[#00A86B]">Impacto</a>
+                <a href="#equipo" class="nav-link text-[#003366] hover:text-[#00A86B]">Equipo</a>
+            </div>
+
+            <div class="flex items-center gap-x-4">
+                <a href="#contacto" 
+                   class="px-6 py-3 bg-[#00A86B] hover:bg-[#008f5a] text-white text-sm font-semibold rounded-2xl flex items-center gap-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Contáctanos</span>
+                </a>
+                
+                <!-- Universidad badge -->
+                <div class="hidden sm:flex items-center gap-x-1.5 bg-white border border-[#C0C0C0] text-[#003366] text-xs font-medium px-4 py-2 rounded-3xl">
+                    <i class="fa-solid fa-university"></i>
+                    <span>Universidad Nacional de Colombia</span>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-[#003366]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t px-6 py-4">
+            <div class="flex flex-col gap-y-4 text-[#003366] font-medium">
+                <a href="#inicio" class="py-2">Inicio</a>
+                <a href="#problema" class="py-2">El Problema</a>
+                <a href="#solucion" class="py-2">Nuestra Solución</a>
+                <a href="#tecnologia" class="py-2">Tecnología</a>
+                <a href="#impacto" class="py-2">Impacto</a>
+                <a href="#equipo" class="py-2">Equipo</a>
+                <a href="#contacto" class="py-3 bg-[#00A86B] text-white text-center rounded-2xl">Contáctanos</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="inicio" class="hero-bg text-white py-24">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-3xl mb-6">
+                    <div class="w-2 h-2 bg-[#00A86B] rounded-full animate-pulse"></div>
+                    ESTUDIANTES · UNIVERSIDAD NACIONAL DE COLOMBIA
+                </div>
+                
+                <h1 class="heading-font text-6xl md:text-7xl font-semibold leading-none tracking-tighter mb-6">
+                    La energía<br>ya está en tus<br>edificios.
+                </h1>
+                
+                <p class="text-2xl text-white/90 max-w-lg mb-8">
+                    Recuperamos la energía desperdiciada del <span class="font-semibold">agua</span> y del <span class="font-semibold">viento</span> en torres urbanas colombianas.
+                </p>
+                
+                <div class="flex items-center gap-x-4 text-lg">
+                    <a href="#solucion" 
+                       class="px-8 py-5 bg-white text-[#003366] hover:bg-[#C0C0C0] rounded-3xl font-semibold flex items-center gap-x-3 text-xl shadow-xl">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                        Ver cómo funciona
+                    </a>
+                    
+                    <div class="text-sm leading-tight">
+                        Hoy pagamos<br>
+                        <span class="text-4xl font-semibold">870 pesos/kWh</span>
+                    </div>
+                </div>
+                
+                <p class="mt-8 text-white/80 flex items-center gap-x-3">
+                    <i class="fa-solid fa-arrow-trend-up text-[#00A86B]"></i>
+                    Microturbinas hidráulicas + Windflower eólico
+                </p>
+            </div>
+            
+            <!-- Hero visual -->
+            <div class="relative">
+                <div class="bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl p-8 shadow-2xl">
+                    <div class="aspect-video bg-gradient-to-br from-[#003366] to-[#00A86B] rounded-2xl flex flex-col items-center justify-center text-center p-8">
+                        <div class="text-6xl mb-4">💧🌬️⚡</div>
+                        <h3 class="text-3xl font-semibold mb-2">Energía que ya existe</h3>
+                        <p class="text-white/90">1000 kg de agua al mes en un apartamento</p>
+                        <div class="mt-8 w-48 h-2 bg-white/30 rounded-full relative overflow-hidden">
+                            <div class="absolute left-0 top-0 h-full bg-white w-3/4 rounded-full"></div>
+                        </div>
+                        <p class="text-xs mt-2 text-white/70">Potencial desperdiciado → Recuperado con microturbinas</p>
+                        
+                        <!-- Windflower icon -->
+                        <div class="mt-12 flex items-center gap-x-6 text-sm">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-wind text-4xl mr-3"></i>
+                                <div>
+                                    Windflower<br>
+                                    <span class="text-[#C0C0C0] text-xs">Recolector eólico</span>
+                                </div>
+                            </div>
+                            <div class="h-12 w-px bg-white/30"></div>
+                            <div class="text-center text-xs leading-tight">
+                                Fachada 200 m²<br>
+                                <span class="text-3xl font-semibold">187 kWh</span><br>
+                                <span class="text-[#C0C0C0]">≈ 163.000 pesos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating badges -->
+                <div class="absolute -top-6 -left-6 bg-white text-[#003366] text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl flex items-center gap-x-2">
+                    <i class="fa-solid fa-droplet text-[#00A86B]"></i>
+                    Agua residual
+                </div>
+                <div class="absolute -bottom-6 -right-6 bg-white text-[#003366] text-xs font-semibold px-4 py-2 rounded-2xl shadow-xl flex items-center gap-x-2">
+                    <i class="fa-solid fa-wind text-[#00A86B]"></i>
+                    Viento a 60 m
+                </div>
+            </div>
+        </div>
     </header>
-    <main>
-        <section>
-            <h2>Descripción</h2>
-            <p>Este proyecto tiene como objetivo desarrollar una solución relacionada con sistemas térmicos. Aquí puedes agregar detalles sobre las funciones, el alcance y los beneficios.</p>
-        </section>
-        <section>
-            <h2>Características</h2>
-            <ul>
-                <li>Monitoreo de temperatura</li>
-                <li>Control de equipos térmicos</li>
-                <li>Interfaz sencilla y responsive</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Contacto</h2>
-            <p>Para más información, escribe a: ejemplo@dominio.com</p>
-        </section>
-    </main>
-    <footer>
-        <p>© 2026 Proyecto Térmicos</p>
+
+    <!-- PROBLEMA -->
+    <section id="problema" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="px-4 py-1 bg-[#003366]/10 text-[#003366] text-sm font-medium rounded-full">EL PROBLEMA EN COLOMBIA</span>
+                <h2 class="section-header text-5xl font-semibold text-[#003366] mt-4">Pagamos las facturas más altas… y desperdiciamos energía todos los días</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-[#F8F9FA] p-8 rounded-3xl card-hover">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <i class="fa-solid fa-file-invoice-dollar text-6xl text-[#00A86B]"></i>
+                            <h3 class="text-4xl font-semibold text-[#003366] mt-8">870 pesos/kWh</h3>
+                            <p class="text-xl mt-2">Una de las facturas de energía más caras de los servicios públicos en Colombia.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-[#F8F9FA] p-8 rounded-3xl card-hover">
+                    <i class="fa-solid fa-building text-6xl text-[#003366]"></i>
+                    <h3 class="text-4xl font-semibold text-[#003366] mt-8">Edificios que desperdician</h3>
+                    <p class="mt-6 text-lg">El agua sube, acumula energía potencial y cae por los desagües sin ser aprovechada. El viento en altura es más fuerte y estable, pero no lo capturamos.</p>
+                </div>
+                
+                <div class="bg-[#F8F9FA] p-8 rounded-3xl card-hover">
+                    <div class="text-6xl mb-6">📍</div>
+                    <h3 class="text-4xl font-semibold text-[#003366]">Más de 2.302.344 predios residenciales</h3>
+                    <p class="mt-6 text-lg">Muchos en torres que concentran altura, flujo de agua y exposición al viento. Estructuras perfectas para recuperación energética.</p>
+                </div>
+            </div>
+            
+            <p class="text-center text-xl text-[#003366] max-w-2xl mx-auto mt-16 font-medium">
+                Este proyecto no parte de una tecnología nueva, sino de una pregunta concreta:<br>
+                <span class="italic text-2xl">¿Cómo hacemos que sistemas de recuperación energética funcionen en el uso cotidiano de los hogares?</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- SOLUCIÓN -->
+    <section id="solucion" class="py-20 bg-gradient-to-b from-[#F8F9FA] to-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7">
+                    <h2 class="section-header text-5xl font-semibold text-[#003366] mb-8">Nuestra solución: energía que ya está ahí</h2>
+                    <p class="text-xl text-gray-700 mb-10">No cambiamos hábitos. No hacemos intervenciones invasivas. Solo integramos sistemas de recuperación en edificios existentes con impacto acumulativo.</p>
+                    
+                    <div class="space-y-8">
+                        <!-- Agua -->
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 flex-shrink-0 bg-[#00A86B] text-white rounded-2xl flex items-center justify-center text-3xl">💧</div>
+                            <div>
+                                <h3 class="text-3xl font-semibold text-[#003366]">Primero, el agua</h3>
+                                <p class="mt-3 text-lg">En un apartamento promedio se consumen cerca de <strong>1000 kilogramos al mes</strong>. Esa agua sube, acumula energía potencial… y luego cae por los desagües sin ser aprovechada.</p>
+                                <p class="mt-4 text-[#00A86B] font-semibold flex items-center gap-x-2">
+                                    <i class="fa-solid fa-microchip"></i>
+                                    Nuestra propuesta: microturbinas integradas al sistema hidráulico del edificio
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Viento -->
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 flex-shrink-0 bg-[#003366] text-white rounded-2xl flex items-center justify-center text-3xl">🌬️</div>
+                            <div>
+                                <h3 class="text-3xl font-semibold text-[#003366]">Segundo, el viento</h3>
+                                <p class="mt-3 text-lg">A mayor altura, hay menos fricción. A 30 metros el viento es entre un <strong>20% y 40% más intenso</strong>, y a 60 metros hasta un <strong>70% más</strong>.</p>
+                                <p class="mt-4 text-[#00A86B] font-semibold">Implementamos microgeneración eólica en fachadas y cubiertas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Windflower -->
+                <div class="md:col-span-5 bg-white border border-[#C0C0C0] rounded-3xl p-8">
+                    <div class="flex justify-between items-baseline mb-6">
+                        <div>
+                            <span class="text-xs tracking-widest bg-[#00A86B]/10 text-[#00A86B] px-3 py-1 rounded-full">PROTOTIPO</span>
+                            <h4 class="text-4xl font-semibold text-[#003366] mt-2">Windflower</h4>
+                            <p class="text-sm text-gray-500">Recolector de energía eólica diseñado por la startup</p>
+                        </div>
+                        <i class="fa-solid fa-wind text-6xl text-[#00A86B]"></i>
+                    </div>
+                    <p class="text-lg text-gray-600">Un aerogenerador que convierte energía cinética del viento en electricidad mediante palas, veleta, buje, eje lento, multiplicadora (x100), eje rápido y generador.</p>
+                    <div class="mt-8 grid grid-cols-2 gap-4 text-center text-sm border-t pt-6">
+                        <div>
+                            <div class="font-mono text-4xl text-[#003366]">11 km/h</div>
+                            <p class="text-[#00A86B]">Viento mínimo para generar</p>
+                        </div>
+                        <div>
+                            <div class="font-mono text-4xl text-[#003366]">1500 RPM</div>
+                            <p class="text-[#00A86B]">Eje rápido hacia el generador</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECNOLOGÍA -->
+    <section id="tecnologia" class="py-20 bg-[#003366] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-center text-5xl font-semibold mb-16">Tecnología probada, adaptada a la realidad colombiana</h2>
+            
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Turbinas hidráulicas -->
+                <div>
+                    <div class="flex items-center gap-x-4 mb-6">
+                        <span class="px-5 py-1 bg-[#00A86B] text-white text-sm font-medium rounded-3xl">AGUA</span>
+                        <h3 class="text-3xl font-semibold">Turbinas tipo hélice (propeller)</h3>
+                    </div>
+                    <p class="text-xl opacity-90 mb-8">Basadas en los principios de conservación de energía (Bernoulli), cantidad de movimiento y F = P · A.</p>
+                    
+                    <div class="space-y-6 text-lg">
+                        <div class="flex justify-between items-center border-b border-white/30 pb-6">
+                            <div>
+                                <strong>Turbina Kaplan</strong> (hélice ajustable)<br>
+                                <span class="text-sm opacity-75">Bajo salto (2-30 m), alto caudal. Ideal para edificios.</span>
+                            </div>
+                            <i class="fa-solid fa-check text-[#00A86B] text-2xl"></i>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/30 pb-6">
+                            <div>
+                                <strong>Turbina propeller simple</strong><br>
+                                <span class="text-sm opacity-75">Palas fijas, bajo costo, flujo constante.</span>
+                            </div>
+                            <i class="fa-solid fa-check text-[#00A86B] text-2xl"></i>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/30 pb-6">
+                            <div>
+                                <strong>Turbina Banki (flujo cruzado)</strong><br>
+                                <span class="text-sm opacity-75">Excelente en condiciones variables y poca presión.</span>
+                            </div>
+                            <i class="fa-solid fa-check text-[#00A86B] text-2xl"></i>
+                        </div>
+                        <p class="text-sm opacity-75 italic">En hidráulica domina la presión + caudal. Funciona con agua de desagüe de edificios.</p>
+                    </div>
+                </div>
+                
+                <!-- Eólica -->
+                <div>
+                    <div class="flex items-center gap-x-4 mb-6">
+                        <span class="px-5 py-1 bg-[#C0C0C0] text-[#003366] text-sm font-medium rounded-3xl">VIENTO</span>
+                        <h3 class="text-3xl font-semibold">Microgeneración eólica</h3>
+                    </div>
+                    <p class="text-xl opacity-90 mb-8">Windflower transforma energía cinética del aire en electricidad. Palas captan el máximo movimiento incluso con vientos suaves.</p>
+                    
+                    <div class="bg-white/10 rounded-3xl p-8 backdrop-blur">
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div class="bg-white/10 rounded-2xl p-4">
+                                <div class="text-[#00A86B] text-xs">VELETA</div>
+                                <p class="font-medium">Orientación automática</p>
+                            </div>
+                            <div class="bg-white/10 rounded-2xl p-4">
+                                <div class="text-[#00A86B] text-xs">MULTIPLICADORA</div>
+                                <p class="font-medium">×100 velocidad</p>
+                            </div>
+                            <div class="bg-white/10 rounded-2xl p-4">
+                                <div class="text-[#00A86B] text-xs">GENERADOR</div>
+                                <p class="font-medium">1500 RPM → electricidad</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-center mt-10 text-sm opacity-75">En una fachada de 200 m² recuperamos 675.000 kilojoules → <strong class="text-3xl">187 kWh</strong> → <strong class="text-[#C0C0C0]">≈ 163.000 pesos</strong></p>
+                    </div>
+                    
+                    <p class="mt-8 text-xs opacity-75">* Compatible con baterías en aplicaciones aisladas o microeólica</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMPACTO -->
+    <section id="impacto" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-y-12">
+                <div class="md:col-span-5">
+                    <h2 class="section-header text-5xl font-semibold text-[#003366]">No reemplazamos la red. Hacemos que cada edificio aporte.</h2>
+                    <p class="mt-8 text-xl max-w-md">Cuando multiplicamos pequeñas recuperaciones de energía por millones de viviendas, el resultado deja de ser marginal y se convierte en transformación urbana.</p>
+                    
+                    <div class="mt-16 flex flex-wrap gap-8">
+                        <div>
+                            <div class="text-6xl font-semibold text-[#00A86B] stat-number">2.302.344</div>
+                            <p class="uppercase text-xs tracking-widest">Predios residenciales en Colombia</p>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-semibold text-[#003366] stat-number">163.000</div>
+                            <p class="uppercase text-xs tracking-widest">Pesos recuperados por fachada de 200 m²</p>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-semibold text-[#00A86B]">70%</div>
+                            <p class="uppercase text-xs tracking-widest">Más viento a 60 metros de altura</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7 bg-[#F8F9FA] rounded-3xl p-10">
+                    <h3 class="text-2xl mb-6">Comparación de tecnologías</h3>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-[#C0C0C0]">
+                                <th class="text-left py-4 font-medium">Característica</th>
+                                <th class="text-center py-4 font-medium">Turbina 1MW Industrial</th>
+                                <th class="text-center py-4 font-medium">Portátil Agua</th>
+                                <th class="text-center py-4 font-medium">Eólica Vertical (Windflower)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b border-[#C0C0C0]">
+                                <td class="py-4">Fluido</td>
+                                <td class="text-center">Agua</td>
+                                <td class="text-center">Agua</td>
+                                <td class="text-center">Aire</td>
+                            </tr>
+                            <tr class="border-b border-[#C0C0C0]">
+                                <td class="py-4">Potencia</td>
+                                <td class="text-center">Muy alta (MW)</td>
+                                <td class="text-center">Baja–media</td>
+                                <td class="text-center">Media</td>
+                            </tr>
+                            <tr class="border-b border-[#C0C0C0]">
+                                <td class="py-4">Uso</td>
+                                <td class="text-center">Industrial</td>
+                                <td class="text-center">Doméstico</td>
+                                <td class="text-center">Doméstico / Edificios</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4">Depende de</td>
+                                <td class="text-center text-emerald-600">Presión + caudal</td>
+                                <td class="text-center text-emerald-600">Presión + caudal</td>
+                                <td class="text-center text-amber-500">Velocidad del aire</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPO -->
+    <section id="equipo" class="py-20 bg-[#F8F9FA]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="px-4 py-1 bg-[#003366]/10 text-[#003366] text-sm font-medium rounded-full">NUESTRO EQUIPO</span>
+                <h2 class="section-header text-5xl font-semibold text-[#003366] mt-4">Estudiantes de Ingeniería · Universidad Nacional de Colombia</h2>
+                <p class="text-xl text-gray-600 mt-4">Un grupo de ingenieros apasionados por la eficiencia energética urbana</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Miembro 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-64 bg-gradient-to-br from-[#003366] to-[#00A86B] flex items-center justify-center text-8xl text-white/90">
+                        👷‍♂️
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-[#003366]">José García</h4>
+                        <p class="text-[#00A86B] text-sm font-medium">Líder de Proyecto · Aerogeneradores</p>
+                        <p class="mt-4 text-gray-600 text-sm leading-relaxed">Responsable del diseño y reporte técnico de Windflower. Especialista en conversión de energía cinética y multiplicadoras.</p>
+                        <div class="flex gap-x-4 mt-6 text-[#C0C0C0]">
+                            <a href="#" class="hover:text-[#00A86B]"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                            <a href="mailto:jose@termicos.co" class="hover:text-[#00A86B]"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Miembro 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-64 bg-gradient-to-br from-[#00A86B] to-[#003366] flex items-center justify-center text-8xl text-white/90">
+                        💧
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-[#003366]">María López</h4>
+                        <p class="text-[#00A86B] text-sm font-medium">Ingeniería Hidráulica</p>
+                        <p class="mt-4 text-gray-600 text-sm leading-relaxed">Diseño de microturbinas integradas al sistema hidráulico. Experta en turbinas Kaplan y Banki para bajo salto y alto caudal.</p>
+                        <div class="flex gap-x-4 mt-6 text-[#C0C0C0]">
+                            <a href="#" class="hover:text-[#00A86B]"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                            <a href="mailto:maria@termicos.co" class="hover:text-[#00A86B]"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Miembro 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-64 bg-gradient-to-br from-[#003366] to-[#00A86B] flex items-center justify-center text-8xl text-white/90">
+                        🌬️
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-[#003366]">Andrés Vargas</h4>
+                        <p class="text-[#00A86B] text-sm font-medium">Especialista en Microeólica</p>
+                        <p class="mt-4 text-gray-600 text-sm leading-relaxed">Investigación de microgeneración en fachadas y cubiertas. Cálculo de energía recuperada en altura urbana.</p>
+                        <div class="flex gap-x-4 mt-6 text-[#C0C0C0]">
+                            <a href="#" class="hover:text-[#00A86B]"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                            <a href="mailto:andres@termicos.co" class="hover:text-[#00A86B]"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Miembro 4 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-64 bg-gradient-to-br from-[#00A86B] to-[#003366] flex items-center justify-center text-8xl text-white/90">
+                        📊
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-[#003366]">Laura Mendoza</h4>
+                        <p class="text-[#00A86B] text-sm font-medium">Desarrollo Sostenible y Escalabilidad</p>
+                        <p class="mt-4 text-gray-600 text-sm leading-relaxed">Análisis de impacto urbano y adaptación de sistemas a más de 2.3 millones de predios residenciales en Colombia.</p>
+                        <div class="flex gap-x-4 mt-6 text-[#C0C0C0]">
+                            <a href="#" class="hover:text-[#00A86B]"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                            <a href="mailto:laura@termicos.co" class="hover:text-[#00A86B]"><i class="fa-solid fa-envelope text-xl"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center mt-12 text-sm text-gray-400">¿Quieres unirte al equipo? Escríbenos.</p>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="contacto" class="py-20 bg-[#003366] text-white">
+        <div class="max-w-4xl mx-auto text-center px-6">
+            <h2 class="text-5xl font-semibold heading-font mb-4">La energía ya está ahí.<br>¿Quieres hacerla útil?</h2>
+            <p class="text-xl opacity-90 mb-12">Estamos investigando cómo cada edificio urbano en Colombia puede aportar a una transformación energética real.</p>
+            
+            <a href="mailto:contacto@termicos.co" 
+               class="inline-flex items-center justify-center gap-x-4 bg-[#00A86B] hover:bg-white hover:text-[#003366] text-white text-2xl font-medium px-16 py-8 rounded-3xl">
+                CONTACTAR AL EQUIPO
+                <i class="fa-solid fa-arrow-right text-3xl"></i>
+            </a>
+            
+            <p class="mt-12 text-white/70 text-sm">Universidad Nacional de Colombia • Bogotá • 2026</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#F8F9FA] py-12 border-t border-[#C0C0C0]">
+        <div class="max-w-7xl mx-auto px-6 text-center text-xs text-gray-500">
+            <p>Térmicos © 2026 • Startup de estudiantes de Ingeniería de la Universidad Nacional de Colombia</p>
+            <p class="mt-2">Pitch • Reporte técnico • Marco teórico de turbinas • Windflower (prototipo)</p>
+            <div class="flex justify-center gap-x-6 mt-8 text-[#00A86B]">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Tailwind script initialization
+        function initializeTailwind() {
+            return {
+                config(userConfig = {}) {
+                    return {
+                        content: [],
+                        theme: {
+                            extend: {
+                                colors: {
+                                    primary: '#003366',
+                                    accent: '#00A86B',
+                                    silver: '#C0C0C0'
+                                }
+                            }
+                        }
+                    }
+                },
+                theme(userConfig = {}) {
+                    return {
+                        ...this.defaultTheme(),
+                        ...userConfig
+                    }
+                },
+                defaultTheme() {
+                    return {}
+                }
+            }
+        }
+        
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu')
+            menu.classList.toggle('hidden')
+        }
+        
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number')
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/\./g, ''))
+                let count = 0
+                const increment = Math.max(Math.floor(target / 50), 1)
+                const timer = setInterval(() => {
+                    count += increment
+                    if (count >= target) {
+                        count = target
+                        clearInterval(timer)
+                    }
+                    counter.textContent = count.toLocaleString('es-CO')
+                }, 30)
+            })
+        }
+        
+        // Initialize everything
+        window.onload = function() {
+            initializeTailwind()
+            animateCounters()
+            console.log('%c✅ Página de Térmicos cargada correctamente con esquema azul-verde-plateado', 'color:#00A86B; font-weight:600')
+        }
+    </script>
 </body>
 </html>
+```
